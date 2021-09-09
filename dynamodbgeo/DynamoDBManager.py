@@ -40,6 +40,7 @@ class DynamoDBManager:
         while 'LastEvaluatedKey' in response: 
             params['ExclusiveStartKey']=response['LastEvaluatedKey']
             response = self.config.dynamoDBClient.query(**params)
+            del params['ExclusiveStartKey']
             data.extend(response['Items'])
         return data
 
